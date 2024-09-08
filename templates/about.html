@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobFinder/About</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 flex items-center justify-center mt-8">
+    <div class="max-w-4xl w-full bg-white shadow-lg rounded-lg p-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">About JobFinder</h1>
+        
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Who We Are</h2>
+            <p class="text-gray-600 leading-relaxed">
+                At <strong>JobFinder</strong>, we believe in connecting job seekers with the best opportunities from recognized companies around the world. Our dedicated team researches and compiles job openings across various industries, ensuring you have access to the latest and most relevant job listings available.
+            </p>
+        </div>
+        
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Our Process</h2>
+            <p class="text-gray-600 leading-relaxed">
+                We meticulously search through job postings from a wide range of reputable companies, filtering out only the most trustworthy and recognized employers. Every job listed on our platform undergoes verification to provide you with high-quality opportunities.
+            </p>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Why Choose Us?</h2>
+            <ul class="list-disc pl-5 text-gray-600">
+                <li>We prioritize jobs from recognized companies to ensure trustworthiness.</li>
+                <li>Our platform is user-friendly, with a clean interface and easy navigation.</li>
+                <li>We regularly update job listings to reflect the latest opportunities.</li>
+                <li>We offer personalized job recommendations based on your interests and profile.</li>
+            </ul>
+        </div>
+
+        <div class="text-center">
+            <a href="{% url 'jobs' %}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">
+                Browse Jobs
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

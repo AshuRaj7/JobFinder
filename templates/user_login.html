@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    </head>
+    {% endblock %}
+
+    {% block content %}
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-8">
+            {% if messages %}
+            <ul class="messages">
+                {% for msg in messages %}
+                <li class="text-red-500">{{msg}}</li>
+                {%endfor%}
+            </ul>
+            {%endif%}
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-6"><u>Login</u></h2>
+    
+            <form method="POST" action="{% url 'user_login' %}">
+                {% csrf_token %}
+    
+                <!-- Username -->
+                <div class="mb-6">
+                    <label for="username" class="block text-gray-700 font-semibold">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter your username" required>
+                </div>
+    
+                <!-- Password -->
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 font-semibold">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter your password" required>
+                </div>
+    
+                <!-- Login Button -->
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">Login</button>
+                </div>
+
+            
+    
+                <div class="mt-1 text-center"></div>
+                    Did'nt have an Account?
+                    <a href="{% url  'user_signup' %}" class=" text-blue-500 px-6 py-3 rounded-lg hover:text-blue-300"><b><u>SIGNUP</u></b></a>
+                </div>
+                
+                <!-- Error Message (if any) -->
+                {% if error_message %}
+                    <p class="text-red-500 text-center mt-4">{{ error_message }}</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+    

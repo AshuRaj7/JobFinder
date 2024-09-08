@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        
+    </head>
+    {% endblock %}
+{% block content %}
+<div class="back min-h-screen bg-gray-100  flex flex-col items-center justify-center">
+    <!-- Hero Section -->
+    <section class="back w-full bg-cover bg-center h-96" style="background-image: url('{%static 'd.jpg' %}');">
+        <div class="back flex items-center justify-center h-full bg-black bg-opacity-30">
+            <div class="text-center text-white">
+                <h1 class="text-5xl font-bold mb-4">Find Your Dream Job</h1>
+                <p class="text-lg mb-6">Explore the latest job opportunities from recognized companies</p>
+                <a href="{%url 'jobs' %}" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="py-10 w-full bg-white shadow-lg rounded-lg max-w-4xl mx-auto -mt-16 p-6">
+        <h2 class="text-2xl font-semibold text-center mb-6">Search for Jobs</h2>
+        <form class="flex justify-between space-x-4" method="POSTR" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input type="text" name="t_c" class="w-full p-4 border rounded-lg focus:outline-none" placeholder="Job title, company...">
+            <input type="text" name="loc" class="w-full p-4 border rounded-lg focus:outline-none" placeholder="Location">
+            <button class="bg-blue-500 text-white px-6 py-4 rounded-lg hover:bg-blue-600">Search</button>
+        </form>
+    </div>
+
+    <!-- Featured Jobs Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-12">Featured Jobs</h2>
+            <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Job Card -->
+                {% for job in jobs %}
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-3">{{job.title}}</h3>
+                    <p class="text-gray-600 mb-2">{{job.company}} • {{job.location}}</p>
+                    <p class="text-sm text-gray-500 mb-4">Full-time • {{job.salary}}</p>
+                    {% if job.id %}
+                    <a href="{%url 'details' job.id %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Job</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <div class="flex  mb-10 justify-center mt-6">
+        {% if jobs.has_other_pages %}
+          <ul class="flex pagination space-x-2">
+              {% if jobs.has_previous %}
+              <li><a href="?{% if t_c %}t_c={{ t_c }}&{% endif %}{% if loc %}loc={{ loc }}&{% endif %}&page={{ jobs.previous_page_number }}" class="px-4 py-2 rounded bg-blue-200 hover:bg-blue-500"><</a></li>
+              {% endif %}
+              {% for num in jobs.paginator.page_range %}
+              {% if jobs.number == num %}
+              <li class="px-4 py-2 -mt-2 rounded bg-teal-400">{{ num }}</li>
+              {% else %}
+              <li><a href="?{% if t_c %}t_c={{ t_c }}&{% endif %}{% if loc %}loc={{ loc }}&{% endif %}&page={{ num }}" class="px-4 py-2 rounded bg-blue-200 hover:bg-blue-500">{{ num }}</a></li>
+              {% endif %}
+              {% endfor %}
+              {% if jobs.has_next %}
+              <li><a href="?{% if t_c %}t_c={{ t_c }}&{% endif %}{% if loc %}loc={{ loc }}&{% endif %}&page={{ jobs.next_page_number }}" class="px-4 py-2 rounded bg-blue-200 hover:bg-blue-500">></a></li>
+              {% endif %}
+          </ul>
+          {% endif %}
+          </div>
+    <!-- Companies Logos -->
+    <section class="bg-gray-100 py-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-2xl font-semibold mb-8">Opportunities from Top Companies like</h2>
+            <div class="flex justify-center space-x-8">
+                <img src="{% static 'e.jpg' %}" class="h-20" alt="Company 1">
+                <img src="{% static 'f.jpg' %}" class="h-20" alt="Company 2">
+                <img src="{% static 'g.jpg' %}" class="h-20" alt="Company 3">
+                <img src="{% static 'h.jpg' %}" class="h-20" alt="Company 4">
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% endblock %}

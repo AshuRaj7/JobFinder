@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobFinder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-100 py-12">
+    <div class="container mx-auto">
+        <!-- Job Header Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">{{ job.title }}</h1>
+                    <p class="text-lg text-gray-600">{{ job.company }} • {{ job.location }}</p>
+                    <!-- <p class="mt-2 text-sm text-gray-500">Posted on: {{ job.posted_date }}</p> -->
+                </div>
+                <div class="mt-4 lg:mt-0">
+                    <a href="{{job.applylink}}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Description Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Job Description</h2>
+            <p class="text-gray-700">{{ job.description }}</p>
+        </div>
+
+        <!-- Job Responsibilities Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Responsibilities</h2>
+            <p class="text-gray-700">{{ job.responsibilities }}</p>
+            
+        </div>
+
+        <!-- Job Requirements Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Requirements</h2>
+            <ul class="list-disc list-inside text-gray-700">
+                <p class="text-gray-700">{{ job.requirements }}</p>
+            </ul>
+        </div>
+
+        <!-- Job Benefits Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Benefits</h2>
+            <p class="text-gray-700">{{ job.benefits }}</p>
+        </div>
+
+        <!-- Company Info Section -->
+        <!-- <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">About {{ job.company }}</h2>
+            <p class="text-gray-700">{{ job.about }}</p>
+        </div> -->
+    </div>
+</div>
+{% endblock %}
